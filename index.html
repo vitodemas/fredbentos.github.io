@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fred Bentos — Digital Marketing Strategist</title>
+<meta name="description" content="Fred Bentos. Digital marketing strategist behind some of Indonesia's most-awarded campaigns. 1.6B impressions. National record-breaker.">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ── Reset & Base ─────────────────────────── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --white: #fafaf8;
+  --black: #111110;
+  --grey: #6b6b67;
+  --light: #ebebе8;
+  --rule: #e0dfd9;
+  --accent: #c0572a;
+  --fade: #f2f1ed;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--white);
+  color: var(--black);
+  font-weight: 300;
+  line-height: 1.6;
+  cursor: none;
+}
+
+/* ── Custom Cursor ────────────────────────── */
+.cursor {
+  width: 8px; height: 8px;
+  background: var(--black);
+  border-radius: 50%;
+  position: fixed;
+  top: 0; left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.15s ease, background 0.2s ease;
+  transform: translate(-50%, -50%);
+}
+.cursor.expanded {
+  transform: translate(-50%, -50%) scale(5);
+  background: rgba(17,17,16,0.08);
+}
+
+/* ── Nav ──────────────────────────────────── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 28px 60px;
+  mix-blend-mode: normal;
+  background: rgba(250,250,248,0.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.nav-logo {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  color: var(--black);
+  text-decoration: none;
+}
+.nav-links {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--grey);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--black); }
+
+/* ── Hero ─────────────────────────────────── */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 60px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--grey);
+  margin-bottom: 24px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.2s forwards;
+}
+
+.hero-name {
+  font-family: 'Libre Baskerville', serif;
+  font-size: clamp(52px, 9vw, 120px);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  color: var(--black);
+  opacity: 0;
+  animation: fadeUp 0.9s ease 0.35s forwards;
+}
+
+.hero-name em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.hero-sub {
+  margin-top: 32px;
+  max-width: 480px;
+  font-size: 16px;
+  color: var(--grey);
+  line-height: 1.7;
+  opacity: 0;
+  animation: fadeUp 0.9s ease 0.5s forwards;
+}
+
+.hero-sub strong { color: var(--black); font-weight: 500; }
+
+.hero-scroll {
+  position: absolute;
+  right: 60px;
+  bottom: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  animation: fadeUp 1s ease 0.9s forwards;
+}
+.hero-scroll span {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--grey);
+  writing-mode: vertical-rl;
+}
+.scroll-line {
+  width: 1px;
+  height: 60px;
+  background: var(--rule);
+  position: relative;
+  overflow: hidden;
+}
+.scroll-line::after {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--accent);
+  animation: scrollDown 1.8s ease-in-out infinite;
+}
+
+@keyframes scrollDown {
+  0% { top: -100%; }
+  100% { top: 100%; }
+}
+
+/* ── Numbers ──────────────────────────────── */
+#numbers {
+  padding: 100px 60px;
+  border-top: 1px solid var(--rule);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--rule);
+}
+
+.stat {
+  background: var(--white);
+  padding: 52px 48px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.stat.visible { opacity: 1; transform: translateY(0); }
+
+.stat-num {
+  font-family: 'Libre Baskerville', serif;
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 400;
+  color: var(--black);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+.stat-num span { color: var(--accent); }
+.stat-label {
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--grey);
+  line-height: 1.5;
+  max-width: 220px;
+}
+.stat-label strong { color: var(--black); font-weight: 500; }
+
+/* ── Work ─────────────────────────────────── */
+#work {
+  padding: 120px 60px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 64px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--rule);
+}
+.section-title {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--grey);
+}
+.section-count {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 13px;
+  color: var(--grey);
+  font-style: italic;
+}
+
+.case {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 40px;
+  padding: 40px 0;
+  border-bottom: 1px solid var(--rule);
+  align-items: start;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.case.visible { opacity: 1; transform: translateY(0); }
+.case:hover .case-title { color: var(--accent); }
+
+.case-meta {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--grey);
+  padding-top: 4px;
+}
+.case-year { display: block; margin-bottom: 4px; }
+
+.case-body {}
+.case-title {
+  font-family: 'Libre Baskerville', serif;
+  font-size: clamp(20px, 2.5vw, 28px);
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--black);
+  transition: color 0.2s;
+  margin-bottom: 12px;
+}
+.case-desc {
+  font-size: 14px;
+  color: var(--grey);
+  line-height: 1.7;
+  max-width: 480px;
+}
+
+.case-result {
+  text-align: right;
+}
+.result-num {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--black);
+  letter-spacing: -0.02em;
+  display: block;
+}
+.result-label {
+  font-size: 11px;
+  color: var(--grey);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-top: 4px;
+  display: block;
+}
+
+/* ── About ────────────────────────────────── */
+#about {
+  padding: 120px 60px;
+  background: var(--fade);
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.about-label {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--grey);
+  padding-top: 8px;
+}
+
+.about-body {}
+.about-headline {
+  font-family: 'Libre Baskerville', serif;
+  font-size: clamp(24px, 3vw, 38px);
+  font-weight: 400;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  margin-bottom: 28px;
+}
+.about-headline em { font-style: italic; color: var(--accent); }
+.about-text {
+  font-size: 15px;
+  color: var(--grey);
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+.about-text strong { color: var(--black); font-weight: 500; }
+
+.skills-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 32px;
+}
+.skill-chip {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  padding: 6px 14px;
+  border: 1px solid var(--rule);
+  color: var(--grey);
+  background: var(--white);
+}
+
+/* ── Awards ───────────────────────────────── */
+#awards {
+  padding: 120px 60px;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 80px;
+}
+.awards-label {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--grey);
+  padding-top: 8px;
+}
+.award-list { border-top: 1px solid var(--rule); }
+.award-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 20px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--rule);
+  align-items: center;
+}
+.award-name {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--black);
+  margin-bottom: 4px;
+}
+.award-org {
+  font-size: 12px;
+  color: var(--grey);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.award-year {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 13px;
+  color: var(--grey);
+  font-style: italic;
+  white-space: nowrap;
+}
+
+/* ── Contact ──────────────────────────────── */
+#contact {
+  padding: 140px 60px;
+  text-align: center;
+  border-top: 1px solid var(--rule);
+}
+.contact-headline {
+  font-family: 'Libre Baskerville', serif;
+  font-size: clamp(36px, 6vw, 80px);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 32px;
+}
+.contact-headline em { font-style: italic; color: var(--accent); }
+.contact-sub {
+  font-size: 15px;
+  color: var(--grey);
+  margin-bottom: 48px;
+}
+.contact-links {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.contact-link {
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--black);
+  text-decoration: none;
+  border-bottom: 1px solid var(--black);
+  padding-bottom: 2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.contact-link:hover { color: var(--accent); border-color: var(--accent); }
+
+/* ── Footer ───────────────────────────────── */
+footer {
+  padding: 28px 60px;
+  border-top: 1px solid var(--rule);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+footer span {
+  font-size: 11px;
+  color: var(--grey);
+  letter-spacing: 0.06em;
+}
+
+/* ── Animations ───────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Responsive ───────────────────────────── */
+@media (max-width: 768px) {
+  nav { padding: 24px 28px; }
+  .nav-links { display: none; }
+  #hero { padding: 0 28px 72px; }
+  .hero-scroll { display: none; }
+  #numbers { grid-template-columns: 1fr; padding: 60px 28px; }
+  #work { padding: 80px 28px; }
+  .case { grid-template-columns: 1fr; gap: 16px; }
+  .case-result { text-align: left; }
+  #about { grid-template-columns: 1fr; padding: 80px 28px; gap: 32px; }
+  #awards { grid-template-columns: 1fr; padding: 80px 28px; gap: 32px; }
+  #contact { padding: 100px 28px; }
+  footer { padding: 24px 28px; flex-direction: column; gap: 8px; text-align: center; }
+}
+
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+
+<!-- Nav -->
+<nav>
+  <a href="#hero" class="nav-logo">Fred Bentos</a>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#awards">Awards</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<section id="hero">
+  <p class="hero-eyebrow">Digital Marketing Strategist · Jakarta, Indonesia</p>
+  <h1 class="hero-name">Fred<br><em>Bentos.</em></h1>
+  <p class="hero-sub">
+    I build campaigns that move people — and <strong>move numbers</strong>.<br>
+    Performance marketing, brand strategy, and full-funnel thinking
+    behind some of Indonesia's most-awarded work.
+  </p>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- Numbers -->
+<section id="numbers">
+  <div class="stat">
+    <div class="stat-num">1.6<span>B</span></div>
+    <div class="stat-label"><strong>Impressions</strong> — Livin' by Mandiri launch. 161% above KPI.</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">620<span>M</span></div>
+    <div class="stat-label"><strong>Impressions</strong> — Rise Into Space. National record-breaker.</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">IDR<span> 200M+</span></div>
+    <div class="stat-label"><strong>Revenue driven</strong> — via performance campaigns at EF English First.</div>
+  </div>
+</section>
+
+<!-- Work -->
+<section id="work">
+  <div class="section-header">
+    <span class="section-title">Selected Work</span>
+    <span class="section-count">03 campaigns</span>
+  </div>
+
+  <div class="case">
+    <div class="case-meta">
+      <span class="case-year">2021</span>
+      Bank Mandiri
+    </div>
+    <div class="case-body">
+      <h3 class="case-title">Livin' by Mandiri — App Launch</h3>
+      <p class="case-desc">End-to-end performance strategy for Indonesia's biggest banking app launch. Multi-platform paid media across Meta, Google, TikTok, and X — driving 161% above KPI and winning Twitter Indonesia's Best Use of Video.</p>
+    </div>
+    <div class="case-result">
+      <span class="result-num">1.6B</span>
+      <span class="result-label">Impressions</span>
+    </div>
+  </div>
+
+  <div class="case">
+    <div class="case-meta">
+      <span class="case-year">2023</span>
+      Bank Mandiri
+    </div>
+    <div class="case-body">
+      <h3 class="case-title">Rise Into Space — 25th Anniversary</h3>
+      <p class="case-desc">A record-breaking campaign that literally launched a banking application into space. 34M interactions, a MURI national record, and an MMA Smarties finalist nomination. The kind of brief that doesn't come twice.</p>
+    </div>
+    <div class="case-result">
+      <span class="result-num">620M</span>
+      <span class="result-label">Impressions · MURI Record</span>
+    </div>
+  </div>
+
+  <div class="case">
+    <div class="case-meta">
+      <span class="case-year">2020–21</span>
+      EF English First
+    </div>
+    <div class="case-body">
+      <h3 class="case-title">#DreamBigWithEF — Lead Generation</h3>
+      <p class="case-desc">Built and scaled a performance marketing engine from scratch — SEO, SEM, and paid social working in concert. Delivered 500+ qualified leads per month and a measurable IDR 200M+ revenue uplift through relentless funnel optimisation.</p>
+    </div>
+    <div class="case-result">
+      <span class="result-num">500+</span>
+      <span class="result-label">Leads / Month</span>
+    </div>
+  </div>
+
+</section>
+
+<!-- About -->
+<section id="about">
+  <div class="about-label">About</div>
+  <div class="about-body">
+    <h2 class="about-headline">Strategy that lives<br>at the edge of <em>creativity</em><br>and data.</h2>
+    <p class="about-text">
+      I'm Fred Bentos — a digital marketing strategist with over a decade of experience turning ambitious briefs into measurable results. I've led campaigns for <strong>Indonesia's largest bank</strong>, built lead generation systems from zero, and managed multi-market brand activations across Southeast Asia.
+    </p>
+    <p class="about-text">
+      My edge is the intersection: I think in stories but I work in numbers. Full-funnel strategy, performance marketing, creative direction, analytics — I move fluently between all of it.
+    </p>
+    <div class="skills-row">
+      <span class="skill-chip">Meta Ads</span>
+      <span class="skill-chip">Google Ads</span>
+      <span class="skill-chip">TikTok Ads</span>
+      <span class="skill-chip">Programmatic</span>
+      <span class="skill-chip">GA4</span>
+      <span class="skill-chip">Looker Studio</span>
+      <span class="skill-chip">A/B Testing</span>
+      <span class="skill-chip">Full-Funnel Strategy</span>
+      <span class="skill-chip">SEO / SEM</span>
+      <span class="skill-chip">Brand Activation</span>
+    </div>
+  </div>
+</section>
+
+<!-- Awards -->
+<section id="awards">
+  <div class="awards-label">Recognition</div>
+  <div class="award-list">
+    <div class="award-item">
+      <div>
+        <div class="award-name">MMA Smarties — Finalist</div>
+        <div class="award-org">Product / Service Launch · Rise Into Space</div>
+      </div>
+      <div class="award-year">2024</div>
+    </div>
+    <div class="award-item">
+      <div>
+        <div class="award-name">Museum Rekor Indonesia — Record Breaker</div>
+        <div class="award-org">First Banking App to Rise Into Space</div>
+      </div>
+      <div class="award-year">2023</div>
+    </div>
+    <div class="award-item">
+      <div>
+        <div class="award-name">Twitter Indonesia — Best Use of Video</div>
+        <div class="award-org">Livin' by Mandiri Launch Campaign</div>
+      </div>
+      <div class="award-year">2021</div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact">
+  <h2 class="contact-headline">Let's make<br>something <em>remarkable.</em></h2>
+  <p class="contact-sub">Open to freelance projects, consulting, and the right full-time opportunities.</p>
+  <div class="contact-links">
+    <a href="mailto:vito.demasyanda@gmail.com" class="contact-link">Email</a>
+    <a href="https://linkedin.com/in/vitodemas" target="_blank" class="contact-link">LinkedIn</a>
+    <a href="#work" class="contact-link">View Work</a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <span>© 2025 Fred Bentos</span>
+  <span>Jakarta, Indonesia</span>
+</footer>
+
+<script>
+// Cursor
+const cursor = document.getElementById('cursor');
+document.addEventListener('mousemove', e => {
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top = e.clientY + 'px';
+});
+document.querySelectorAll('a, button').forEach(el => {
+  el.addEventListener('mouseenter', () => cursor.classList.add('expanded'));
+  el.addEventListener('mouseleave', () => cursor.classList.remove('expanded'));
+});
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.stat, .case').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
