@@ -673,4 +673,12 @@ document.querySelectorAll('a, button').forEach(el => {
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry, i) => {
     if (entry.isIntersecting) {
-      setTimeout(() => entry.target.classList.add('visible
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.stat, .case').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
